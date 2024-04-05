@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="rating-data-app" />
-        <module name="movie-info-details-app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="movie-catalog-app" target="17" />
+      <module name="movie-info-details-app" target="17" />
       <module name="movie-management-ms" target="17" />
     </bytecodeTargetLevel>
   </component>
