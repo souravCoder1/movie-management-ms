@@ -11,14 +11,14 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="movie-catalog-app" target="17" />
-      <module name="movie-info-details-app" target="17" />
+      <module name="movie-info-details-app" target="1.5" />
       <module name="movie-management-ms" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="movie-catalog-app" options="-parameters" />
-      <module name="movie-info-details-app" options="-parameters" />
+      <module name="movie-info-details-app" options="" />
       <module name="movie-management-ms" options="-parameters" />
       <module name="rating-data-app" options="-parameters" />
     </option>
