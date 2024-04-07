@@ -1,20 +1,68 @@
 package org.sourav.moviecatalog.service;
 
 import org.sourav.moviecatalog.entity.Movie;
+import org.sourav.moviecatalog.entity.MovieCatalogItem;
+import org.sourav.moviecatalog.entity.Rating;
 import org.sourav.moviecatalog.repo.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 // MovieService.java - Service class to handle business logic
 @Service
 public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
-    
-    public List<Movie> getMoviesForUser(Long userId) {
-        // Implement logic to fetch movies for the given user
-        // Example: return movieRepository.findAll();
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${rating.service.url}")
+    private String ratingServiceUrl;
+
+    @Value("${movie.info.service.url}")
+    private String movieInfoServiceUrl;
+    public List<MovieCatalogItem> getMoviesForUser(Long userId) {
+
+        // Call rating service to get ratings for the user
+        ResponseEntity<List<Rating>> ratingResponse = restTemplate.exchange(
+                ratingServiceUrl + "/ratings/{userId}",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Rating>>() {
+                },
+                userId
+        );
+
+        List<Rating> ratings = ratingResponse.getBody();
+
+        // Call movie info service to get movie details for each movie in the user's catalog
+        return ratings.stream()
+                .map(rating -> {
+                    ResponseEntity<Movie> movieResponse = restTemplate.exchange(
+                            movieInfoServiceUrl + "/movies/{movieId}",
+                            HttpMethod.GET,
+                            null,
+                            Movie.class,
+                            rating.getMovieId()
+                    );
+
+                    Movie movie = movieResponse.getBody();
+
+                    return new MovieCatalogItem(
+                            movie.getId(),
+                            movie.getTitle(),
+                            movie.getGenre(),
+                            rating.getRating());
+                })
+                .collect(Collectors.toList());
+
     }
 }

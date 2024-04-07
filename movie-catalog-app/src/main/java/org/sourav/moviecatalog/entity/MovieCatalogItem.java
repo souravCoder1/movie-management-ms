@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 // Movie.java - Entity class representing a movie
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Movie {
-    private Long id;
+public class MovieCatalogItem  {
+    @Id
+    private Long movieId;
     private String title;
     private String genre;
-    private LocalDate releaseDate;
+    private int rating;
     // other attributes, getters, and setters
 }

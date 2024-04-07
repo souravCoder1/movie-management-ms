@@ -1,7 +1,7 @@
 package org.sourav.moviecatalog.controller;
 
+import org.sourav.moviecatalog.entity.MovieCatalogItem;
 import org.sourav.moviecatalog.service.MovieService;
-import org.sourav.moviecatalog.entity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +19,8 @@ public class MovieController {
     private MovieService movieService;
     
     @GetMapping("/{userId}")
-    public ResponseEntity<List<Movie>> getUserMovies(@PathVariable Long userId) {
-        List<Movie> movies = movieService.getMoviesForUser(userId);
+    public ResponseEntity<List<MovieCatalogItem>> getUserMovies(@PathVariable Long userId) {
+        List<MovieCatalogItem> movies = movieService.getMoviesForUser(userId);
         if (!movies.isEmpty()) {
             return ResponseEntity.ok(movies);
         } else {
