@@ -1,11 +1,14 @@
 package org.sourav.moviecatalog.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 // User.java - Entity class representing a user
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
-    @Id
     private Long id;
     private String name;
     // other attributes, getters, and setters
