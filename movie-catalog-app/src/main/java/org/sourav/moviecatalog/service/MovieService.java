@@ -28,7 +28,7 @@ public class MovieService {
         this.webClientBuilder = webClientBuilder;
     }
 
-    public List<MovieCatalogItem> getMoviesForUser(Long userId) {
+    public Flux<MovieCatalogItem> getMoviesForUser(Long userId) {
 
         // Call rating service to get ratings for the user
         Flux<Rating> ratingsFlux = webClientBuilder.build()
@@ -50,8 +50,6 @@ public class MovieService {
                                                 movieResponse.getTitle(),
                                                 movieResponse.getGenre(),
                                                 rating.getUser(),
-                                                rating.getRating())))
-                .collect(Collectors.toList())
-                .block();
+                                                rating.getRating())));
     }
 }

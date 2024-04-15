@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class MovieController {
     private MovieService movieService;
     
     @GetMapping("/{userId}")
-    public ResponseEntity<List<MovieCatalogItem>> getUserMovies(@PathVariable Long userId) {
-        List<MovieCatalogItem> movies = movieService.getMoviesForUser(userId);
+    public ResponseEntity<Flux<MovieCatalogItem>> getUserMovies(@PathVariable Long userId) {
+        Flux<MovieCatalogItem> movies = movieService.getMoviesForUser(userId);
         if (movies != null) {
             return ResponseEntity.ok(movies);
         } else {
