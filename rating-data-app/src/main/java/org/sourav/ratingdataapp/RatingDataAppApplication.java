@@ -36,7 +36,7 @@ public class RatingDataAppApplication implements CommandLineRunner {
 		Rating rating = new Rating();
 		rating.setRating(5); // Set the rating
 		rating.setUser(user); // Set the user (many-to-one relationship)
-		rating.setMovieId(123L); // Set the movie ID or any other attributes
+		rating.setMovieId(1L); // Set the movie ID or any other attributes
 
 		// Now persist the Rating entity using Spring Data JPA repository
 		ratingRepository.saveAndFlush(rating);

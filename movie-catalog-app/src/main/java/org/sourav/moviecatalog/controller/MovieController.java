@@ -19,8 +19,8 @@ public class MovieController {
     private MovieService movieService;
     
     @GetMapping("/{userId}")
-    public ResponseEntity<MovieCatalogItem> getUserMovies(@PathVariable Long userId) {
-        MovieCatalogItem movies = movieService.getMoviesForUser(userId);
+    public ResponseEntity<List<MovieCatalogItem>> getUserMovies(@PathVariable Long userId) {
+        List<MovieCatalogItem> movies = movieService.getMoviesForUser(userId);
         if (movies != null) {
             return ResponseEntity.ok(movies);
         } else {

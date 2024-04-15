@@ -27,10 +27,10 @@ public class MovieService {
     @Value("${movie.info.service.url}")
     private String movieInfoServiceUrl;
 
-    public MovieCatalogItem getMoviesForUser(Long userId) {
+    public List<MovieCatalogItem> getMoviesForUser(Long userId) {
 
         // Call rating service to get ratings for the user
-        List<Rating> ratingResponse = restTemplate.exchange(
+        List<Rating> ratings = restTemplate.exchange(
                 ratingServiceUrl + "/ratings/{userId}",
                 HttpMethod.GET,
                 null,
@@ -41,7 +41,7 @@ public class MovieService {
 
 
         // Call movie info service to get movie details for each movie in the user's catalog
-        ratingResponse.stream()
+        return ratings.stream()
                 .map(rating -> {
                     Movie movieResponse = restTemplate.exchange(
                             movieInfoServiceUrl + "/movies/{movieId}",
@@ -52,14 +52,13 @@ public class MovieService {
                     ).getBody();
 
 
-                    MovieCatalogItem movieCatalogItem = new MovieCatalogItem(
+                    return new MovieCatalogItem(
                             movieResponse.getId(),
                             movieResponse.getTitle(),
                             movieResponse.getGenre(),
+                            rating.getUser(),
                             rating.getRating());
-                    return movieCatalogItem;
-                });
-
-        return movieCatalogItem;
+                })
+                .collect(Collectors.toList());
     }
 }
