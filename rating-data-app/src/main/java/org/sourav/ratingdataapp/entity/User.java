@@ -1,8 +1,6 @@
 package org.sourav.ratingdataapp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 // User.java - Entity class representing a user
@@ -11,6 +9,7 @@ import lombok.Data;
 @Data
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)  // Ensure this is present
     private Long id;
     private String name;
     // other attributes, getters, and setters

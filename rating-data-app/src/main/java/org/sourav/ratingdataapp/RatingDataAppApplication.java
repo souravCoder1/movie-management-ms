@@ -25,7 +25,7 @@ public class RatingDataAppApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// Create a User instance
-		User user = new User();
+		/*User user = new User();
 		user.setId(1L); // Set the user ID
 		user.setName("John Doe"); // Set the user name
 
@@ -39,7 +39,7 @@ public class RatingDataAppApplication implements CommandLineRunner {
 		rating.setMovieId(1L); // Set the movie ID or any other attributes
 
 		// Now persist the Rating entity using Spring Data JPA repository
-		ratingRepository.saveAndFlush(rating);
+		ratingRepository.saveAndFlush(rating);*/
 	}
 
 }
