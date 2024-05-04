@@ -15,14 +15,8 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     public Rating saveRating(Rating rating) {
         return ratingRepository.save(rating);
-    }
-    public User saveUser(User user) {
-        return userRepository.save(user);
     }
     public List<Rating> getRatingsByUserId(Long userId) {
         return ratingRepository.findByUserId(userId);

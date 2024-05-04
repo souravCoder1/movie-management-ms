@@ -12,6 +12,11 @@ public class MovieService {
     private MovieRepository movieRepository;
     
     public Movie getMovieById(Long id) {
-        return movieRepository.findById(id).orElse(null);
+        return movieRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("Not found"));
+    }
+
+    public Movie saveRating(Movie movie) {
+        return movieRepository.save(movie);
     }
 }
