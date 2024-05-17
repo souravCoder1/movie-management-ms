@@ -1,3 +1,10 @@
+package com.sourav.movie.info.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+import java.time.LocalDate;
+
 // Movie.java - Entity class representing a movie
 @Entity
 public class Movie {

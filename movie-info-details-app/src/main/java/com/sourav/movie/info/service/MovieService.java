@@ -1,3 +1,10 @@
+package com.sourav.movie.info.service;
+
+import com.sourav.movie.info.entity.Movie;
+import com.sourav.movie.info.repo.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 // MovieService.java - Service class to handle business logic
 @Service
 public class MovieService {
